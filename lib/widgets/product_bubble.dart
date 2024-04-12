@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:crud_demo/models/product_model.dart';
+import 'package:crud_demo/screens/edit_product.dart';
 
 class ProductBubble extends StatelessWidget {
   const ProductBubble(
@@ -14,7 +16,17 @@ class ProductBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(productId);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EditProduct(
+              product: Product(
+                id: productId,
+                name: productName,
+                price: double.parse(price),
+              ),
+            ),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(

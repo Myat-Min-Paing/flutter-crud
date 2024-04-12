@@ -11,4 +11,8 @@ class FireStoreServices {
   Stream<QuerySnapshot> getProducts() {
     return _db.collection('products').snapshots();
   }
+
+  Future deleteProduct(String id) async {
+    await _db.collection('products').doc(id).delete();
+  }
 }

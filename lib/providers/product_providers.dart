@@ -7,6 +7,7 @@ class ProductProvider with ChangeNotifier {
   final FireStoreServices _firestoreServices = FireStoreServices();
   late String _name;
   late double _price;
+  String? _id;
   var uuid = Uuid();
 
   String get name => _name;
@@ -23,12 +24,33 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  loadValues(Product product) {
+    _name = product.name;
+    _price = product.price;
+    _id = product.id;
+  }
+
   saveProduct() async {
-    Product newProduct = Product(
-      id: uuid.v4(),
-      name: _name,
-      price: _price,
-    );
-    await _firestoreServices.saveProduct(newProduct);
+    if (_id == null) {
+      await _firestoreServices.saveProduct(
+        Product(
+          id: uuid.v4(),
+          name: _name,
+          price: _price,
+        ),
+      );
+    } else {
+      await _firestoreServices.saveProduct(
+        Product(
+          id: _id.toString(),
+          name: _name,
+          price: _price,
+        ),
+      );
+    }
+  }
+
+  deleteProduct() async {
+    await _firestoreServices.deleteProduct(_id!);
   }
 }
