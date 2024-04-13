@@ -21,9 +21,13 @@ class _EditProductState extends State<EditProduct> {
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
     if (widget.product != null) {
-      nameController.text = widget.product!.name;
-      priceController.text = widget.product!.price.toStringAsFixed(2);
+      nameController.text = widget.product!.name!;
+      priceController.text = widget.product!.price!.toStringAsFixed(2);
       productProvider.loadValues(widget.product!);
+    } else {
+      nameController.text = "";
+      priceController.text = "";
+      productProvider.loadValues(Product());
     }
 
     super.initState();

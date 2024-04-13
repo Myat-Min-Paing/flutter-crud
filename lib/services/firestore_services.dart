@@ -9,7 +9,7 @@ class FireStoreServices {
   }
 
   Stream<QuerySnapshot> getProducts() {
-    return _db.collection('products').snapshots();
+    return _db.collection('products').orderBy('createdAt').snapshots();
   }
 
   Future deleteProduct(String id) async {

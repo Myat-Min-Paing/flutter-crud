@@ -33,15 +33,17 @@ class Products extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-              final products = snapshot.data!.docs;
+              final products = snapshot.data!.docs.reversed;
               List<ProductBubble> productBubbleWidgets = [];
               for (var product in products) {
                 final productName = product.get('name');
                 final productPrice = product.get('price');
+                final productCreatedAt = product.get('createdAt');
                 final productBubbleWidget = ProductBubble(
                   productId: product.id,
                   productName: productName,
                   price: productPrice.toString(),
+                  createdAt: productCreatedAt,
                 );
                 productBubbleWidgets.add(productBubbleWidget);
               }
