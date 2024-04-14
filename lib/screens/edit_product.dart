@@ -102,15 +102,17 @@ class _EditProductState extends State<EditProduct> {
                   SizedBox(
                     width: 10.0,
                   ),
-                  ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                    onPressed: () {
-                      productProvider.deleteProduct();
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Delete'),
-                  ),
+                  widget.product == null
+                      ? Container()
+                      : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
+                          onPressed: () {
+                            productProvider.deleteProduct();
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Delete'),
+                        ),
                 ],
               ),
             ],
